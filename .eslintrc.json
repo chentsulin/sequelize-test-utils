@@ -5,6 +5,11 @@
     "mocha": true
   },
   "rules": {
-    "func-names": 0
+    "max-len": [2, 79, {
+      "ignorePattern": " // eslint-disable-line "
+    }],
+    "func-names": 0,
+    "no-underscore-dangle": 0,
+    "import/no-extraneous-dependencies": 0
   }
 }
