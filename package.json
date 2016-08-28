@@ -1,0 +1,64 @@
+{
+  "name": "sequelize-test-utils",
+  "version": "0.0.1",
+  "description": "Test utils for sequelize",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "repository": "chentsulin/sequelize-test-utils",
+  "author": {
+    "name": "C.T. Lin",
+    "email": "chentsulin@gmail.com",
+    "url": "github.com/chentsulin/sequelize-test-utils"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "files": [
+    "index.js",
+    "lib/"
+  ],
+  "keywords": [
+    "sequelize",
+    "test",
+    "utils",
+    "helper"
+  ],
+  "dependencies": {
+    "sequelize": "^3.24.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.14.0",
+    "chai": "^3.5.0",
+    "dirty-chai": "^1.2.2",
+    "eslint": "^3.4.0",
+    "eslint-config-airbnb-base": "^5.0.3",
+    "eslint-plugin-import": "^1.14.0",
+    "mocha": "^3.0.2",
+    "nyc": "^8.1.0",
+    "sinon": "^1.17.5"
+  },
+  "options": {
+    "mocha": "--compilers js:babel-register --require babel-polyfill --require scripts/mocha-setup.js ./**/__tests__/**/*.spec.js"
+  },
+  "scripts": {
+    "postinstall": "npm run build",
+    "clean": "rimraf lib dist .nyc_output",
+    "build": "npm run clean && babel src -d lib --ignore __tests__",
+    "testonly": "NODE_ENV=test mocha $npm_package_options_mocha",
+    "test": "npm run lint && npm run testonly",
+    "test:cov": "nyc npm test",
+    "lint": "eslint .",
+    "preversion": "npm test",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "devEngines": {
+    "node": "4.x || 5.x || 6.x",
+    "npm": "2.x || 3.x"
+  }
+}
