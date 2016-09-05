@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { methods, spyInstance } from '../query-interface';
+import { methods, spyInstance, createSpyInstance } from '../query-interface';
 
 describe('query-interface', () => {
   describe('methods', () => {
@@ -19,6 +19,14 @@ describe('query-interface', () => {
 
     it('createSchema is a sinon proxy', () => {
       expect(spyInstance.createSchema.isSinonProxy).to.be.true();
+    });
+  });
+
+  describe('createSpyInstance', () => {
+    it('create a spyInstance', () => {
+      const instance = createSpyInstance();
+      expect(instance).to.be.an('Object');
+      expect(instance.createSchema.isSinonProxy).to.be.true();
     });
   });
 });
