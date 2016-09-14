@@ -62,19 +62,19 @@ import { up, down } from '../20160827174306-create-user';
 
 describe('#up', () => {
   it('creates users table', () => {
-    const queryInterfaceSpy = createQueryInterfaceSpy();
-    up(queryInterfaceSpy, Sequelize);
-    expect(queryInterfaceSpy.createTable).to.have.been.calledOnce();
+    const queryInterface = createQueryInterfaceSpy();
+    up(queryInterface, Sequelize);
+    expect(queryInterface.createTable).to.have.been.calledOnce();
 
-    const call = queryInterfaceSpy.createTable.getCall(0);
+    const call = queryInterface.createTable.getCall(0);
     expect(call.args[0]).to.equal('users');
   });
 
   it('table has auto increment id', () => {
-    const queryInterfaceSpy = createQueryInterfaceSpy();
-    up(queryInterfaceSpy, Sequelize);
+    const queryInterface = createQueryInterfaceSpy();
+    up(queryInterface, Sequelize);
 
-    const call = queryInterfaceSpy.createTable.getCall(0);
+    const call = queryInterface.createTable.getCall(0);
     expect(call.args[1]).to.containSubset({
       id: {
         allowNull: false,
@@ -87,10 +87,10 @@ describe('#up', () => {
 });
 
 describe('#down', () => {
-	it('drops users table', () => {
-  	const queryInterfaceSpy = createQueryInterfaceSpy();
-  	down(queryInterfaceSpy, Sequelize);
-  	expect(queryInterfaceSpy.dropTable).to.have.been.calledWith('users');
+    it('drops users table', () => {
+    const queryInterface = createQueryInterfaceSpy();
+    down(queryInterface, Sequelize);
+    expect(queryInterface.dropTable).to.have.been.calledWith('users');
   });
 });
 ```
