@@ -41,9 +41,25 @@ export default {
 };
 ```
 
-tests for user migration (with sinon-chai, chai-subset):
+tests for user migration (with dirty-chai, sinon-chai, chai-subset):
 
 ```js
+import chai from 'chai';
+import dirtyChai from 'dirty-chai';
+import sinonChai from 'sinon-chai';
+import chaiSubset from 'chai-subset';
+
+chai.use(dirtyChai);
+chai.use(sinonChai);
+chai.use(chaiSubset);
+```
+
+```js
+import { expect } from 'chai';
+import Sequelize from 'sequelize';
+import { createQueryInterfaceSpy } from 'sequelize-test-utils';
+import { up, down } from '../20160827174306-create-user';
+
 describe('#up', () => {
   it('creates users table', () => {
     const queryInterfaceSpy = createQueryInterfaceSpy();
