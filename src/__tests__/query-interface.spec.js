@@ -20,6 +20,10 @@ describe('query-interface', () => {
     it('createSchema is a sinon proxy', () => {
       expect(spyInstance.createSchema.isSinonProxy).to.be.true();
     });
+
+    it('createSchema return a thenable', () => {
+      expect(spyInstance.createSchema('users').then).to.be.a('function');
+    });
   });
 
   describe('createSpyInstance', () => {

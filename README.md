@@ -14,6 +14,70 @@
 $ npm install --save-dev sequelize-test-utils
 ```
 
+## Usage
+
+user migration:
+
+```js
+export default {
+  up(queryInterface, Sequelize) {
+    return queryInterface.createTable('users', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      email: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+    });
+  },
+
+  down(queryInterface) {
+    return queryInterface.dropTable('users');
+  },
+};
+```
+
+tests for user migration (with sinon-chai, chai-subset):
+
+```js
+describe('#up', () => {
+  it('creates users table', () => {
+    const queryInterfaceSpy = createQueryInterfaceSpy();
+    up(queryInterfaceSpy, Sequelize);
+    expect(queryInterfaceSpy.createTable).to.have.been.calledOnce();
+
+    const call = queryInterfaceSpy.createTable.getCall(0);
+    expect(call.args[0]).to.equal('users');
+  });
+
+  it('table has auto increment id', () => {
+    const queryInterfaceSpy = createQueryInterfaceSpy();
+    up(queryInterfaceSpy, Sequelize);
+
+    const call = queryInterfaceSpy.createTable.getCall(0);
+    expect(call.args[1]).to.containSubset({
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+    });
+  });
+});
+
+describe('#down', () => {
+	it('drops users table', () => {
+  	const queryInterfaceSpy = createQueryInterfaceSpy();
+  	down(queryInterfaceSpy, Sequelize);
+  	expect(queryInterfaceSpy.dropTable).to.have.been.calledWith('users');
+  });
+});
+```
 
 ## License
 

@@ -18,7 +18,7 @@ export const createSpyInstance = () => {
 
   for (const prop in qi) { // eslint-disable-line guard-for-in, no-restricted-syntax
     if (typeof qi[prop] === 'function') {
-      instance[prop] = spy();
+      instance[prop] = spy(() => Promise.resolve());
     } else {
       instance[prop] = qi[prop];
     }
