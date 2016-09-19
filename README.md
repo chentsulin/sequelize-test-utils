@@ -57,7 +57,7 @@ chai.use(chaiSubset);
 ```js
 import { expect } from 'chai';
 import Sequelize from 'sequelize';
-import { createQueryInterfaceSpy } from 'sequelize-test-utils';
+import { createQueryInterfaceSpy, field } from 'sequelize-test-utils';
 import { up, down } from '../20160827174306-create-user';
 
 describe('#up', () => {
@@ -75,14 +75,11 @@ describe('#up', () => {
     up(queryInterface, Sequelize);
 
     const call = queryInterface.createTable.getCall(0);
-    expect(call.args[1]).to.containSubset({
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-    });
+    const idField = field(call.args[1].id);
+    expect(idField.allowNull()).to.be.false();
+    expect(idField.isAutoIncrement()).to.be.true();
+    expect(idField.isPrimaryKey()).to.be.true();
+    expect(idField.isInteger()).to.be.true();
   });
 });
 

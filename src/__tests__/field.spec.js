@@ -30,6 +30,26 @@ describe('field', () => {
     });
   });
 
+  describe('#isAutoIncrement', () => {
+    it('return true when field will auto increase', () => {
+      expect(field({
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
+      }).isAutoIncrement()).to.be.true();
+    });
+
+    it('return false when is nfield will auto increase', () => {
+      expect(field({
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: false,
+        type: Sequelize.INTEGER,
+      }).isAutoIncrement()).to.be.false();
+    });
+  });
+
   describe('#allowNull', () => {
     it('return true when allow null', () => {
       expect(field({

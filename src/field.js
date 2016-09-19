@@ -24,6 +24,10 @@ class Field {
     return !!this._schema.primaryKey;
   }
 
+  isAutoIncrement() {
+    return !!this._schema.autoIncrement;
+  }
+
   allowNull() {
     return !!this._schema.allowNull;
   }
