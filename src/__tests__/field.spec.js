@@ -145,6 +145,15 @@ describe('field', () => {
       }).isType(Sequelize.STRING)).to.be.true();
     });
 
+    it('return true when type match deeply', () => {
+      /* eslint-disable new-cap */
+      expect(field({
+        allowNull: false,
+        type: Sequelize.ARRAY(Sequelize.STRING),
+      }).isType(Sequelize.ARRAY(Sequelize.STRING))).to.be.true();
+      /* eslint-enable new-cap */
+    });
+
     it('return true when type not match', () => {
       expect(field({
         allowNull: false,

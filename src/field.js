@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import deepEqual from 'deep-equal';
 
 class Field {
   constructor(schema) {
@@ -43,7 +44,7 @@ class Field {
   }
 
   isType(type) {
-    return type && this._schema.type === type;
+    return type && deepEqual(this._schema.type, type);
   }
 
   isString() {

@@ -24,6 +24,7 @@
     "helper"
   ],
   "dependencies": {
+    "deep-equal": "^1.0.1",
     "sequelize": "^3.24.1"
   },
   "devDependencies": {
