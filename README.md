@@ -41,17 +41,15 @@ export default {
 };
 ```
 
-tests for user migration (with dirty-chai, sinon-chai, chai-subset):
+tests for user migration (with dirty-chai, sinon-chai):
 
 ```js
 import chai from 'chai';
 import dirtyChai from 'dirty-chai';
 import sinonChai from 'sinon-chai';
-import chaiSubset from 'chai-subset';
 
 chai.use(dirtyChai);
 chai.use(sinonChai);
-chai.use(chaiSubset);
 ```
 
 ```js
