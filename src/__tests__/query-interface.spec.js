@@ -19,6 +19,11 @@ describe('query-interface', () => {
       expect(instance).to.be.an('Object');
       expect(instance.createSchema.isSinonProxy).to.be.true();
     });
+
+    it('spyInstance with createSchema return a thenable', () => {
+      const instance = createSpyInstance(spy);
+      expect(instance.createSchema('users').then).to.be.a('function');
+    });
   });
 });
 
