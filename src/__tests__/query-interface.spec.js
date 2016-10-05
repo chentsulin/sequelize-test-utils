@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { spy } from 'sinon';
-import { methods, createSpyInstance } from '../query-interface';
+import ModuleMocker from 'jest-mock';
+import { methods, createMockInstance } from '../query-interface';
 
 describe('query-interface', () => {
   describe('methods', () => {
@@ -13,16 +14,24 @@ describe('query-interface', () => {
     });
   });
 
-  describe('createSpyInstance', () => {
-    it('create a spyInstance', () => {
-      const instance = createSpyInstance(spy);
+  describe('createMockInstance', () => {
+    it('create a instance with sinon spy', () => {
+      const instance = createMockInstance(spy);
       expect(instance).to.be.an('Object');
       expect(instance.createSchema.isSinonProxy).to.be.true();
     });
 
-    it('spyInstance with createSchema return a thenable', () => {
-      const instance = createSpyInstance(spy);
+    it('mock instance returns a thenable when createSchema be called', () => {
+      const instance = createMockInstance(spy);
       expect(instance.createSchema('users').then).to.be.a('function');
+    });
+
+    it('create a instance with jest.fn', () => {
+      const moduleMocker = new ModuleMocker();
+      const fn = () => moduleMocker.getMockFunction();
+      const instance = createMockInstance(fn);
+      expect(instance).to.be.an('Object');
+      expect(moduleMocker.isMockFunction(instance.createSchema)).to.be.true();
     });
   });
 });

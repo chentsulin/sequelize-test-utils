@@ -12,12 +12,12 @@ for (const prop in qi) { // eslint-disable-line guard-for-in, no-restricted-synt
   }
 }
 
-export const createSpyInstance = spyFn => {
+export const createMockInstance = mockFn => {
   const instance = {};
 
   for (const prop in qi) { // eslint-disable-line guard-for-in, no-restricted-syntax
     if (typeof qi[prop] === 'function') {
-      instance[prop] = spyFn(() => Promise.resolve());
+      instance[prop] = mockFn(() => Promise.resolve());
     } else {
       instance[prop] = qi[prop];
     }
