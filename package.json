@@ -1,6 +1,6 @@
 {
   "name": "sequelize-test-utils",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Test utils for sequelize",
   "main": "lib/index.js",
   "license": "MIT",
